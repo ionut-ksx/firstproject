@@ -16,6 +16,7 @@ def bubble_sort(arr):
                 swap_happened = True
                 arr[num], arr[num+1] = arr[num+1], arr[num]
 
+"""
 def find_item(find_x, arr):
     new_list = []
     for x, y in enumerate(arr):
@@ -24,37 +25,47 @@ def find_item(find_x, arr):
         else:
             new_list.append('-1')
     return new_list
+"""
 
-def find_first_occurrence(find_x, arr):
-    list = arr.copy()
-    bubble_sort(list)
-    for x in list:
-        if x == find_x:
-            print(f"First occurrence is at index: {list.index(x)}")
+def search_first_occurrence(line2, x):
+    for item, value in enumerate(line2):
+        if int(value) == int(x):
+            print(f"{int(x)} has first occurrence at index {item}", flush=True)
             break
+        elif x not in line2:
+            print("-1")
+            break
+    return
 
+def search_using_binary_alg(ll, low, high, item):
+    if len(ll) > 2:
+        mid = len(ll)//2
+        if ll[mid] == item:
+            return ll[mid]
+        elif ll[mid] > item:
+            return search_using_binary_alg(ll, low, mid-1, item)
+        else:
+            return search_using_binary_alg(ll, mid+1, high, item)
+    else:
+        return -1
 
-def execute():
-    # create the list
-    find_x = input("Enter an integer number between 1 - 9 -> ")
-    if find_x.isnumeric():
-        find_x = int(find_x)
-    l1= []
-    for x in range(100):
-        l1.append(random.randint(1,10))
-
-    print(f"The Original List Is: {l1} ")
-
-    bubble_sort(l1)
-    print(f"Sorted List: {l1}")
-
-    print("Items found:")
-    print(find_item(find_x, l1))
-
-    find_first_occurrence(find_x, l1)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    execute()
+    l2 = []
+    with open("input.txt", "r") as fp:
+        x = fp.readline()[2:-1]
+        l2 = fp.readline().split()
+        # print(l2)
+    fp.close()
+
+    search_first_occurrence(l2, x)
+
+    # not working yet
+    result = search_using_binary_alg(l2, 0, len(l2)-1, x)
+    if result != -1:
+        print(f"Element {x} has the index {result}")
+    else:
+        print("Element is not in the list")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
