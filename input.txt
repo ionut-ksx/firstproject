@@ -1,0 +1,3 @@
+# on the first line, an integer number, called X
+# on the second line, a list of N sorted integers separated by space, where 0 < N <= 10000
+
