@@ -30,7 +30,7 @@ def find_item(find_x, arr):
 def search_first_occurrence(line2, x):
     for item, value in enumerate(line2):
         if int(value) == int(x):
-            print(f"{int(x)} has first occurrence at index {item}", flush=True)
+            print(f"Element {int(x)} has first occurrence at index {item}", flush=True)
             break
         elif x not in line2:
             print("-1")
@@ -38,16 +38,17 @@ def search_first_occurrence(line2, x):
     return
 
 def search_using_binary_alg(ll, low, high, item):
-    if len(ll) > 2:
-        mid = len(ll)//2
+
+    if low > high:
+        return False
+    else:
+        mid = (low + high)//2
         if ll[mid] == item:
-            return ll[mid]
+            return mid
         elif ll[mid] > item:
             return search_using_binary_alg(ll, low, mid-1, item)
         else:
             return search_using_binary_alg(ll, mid+1, high, item)
-    else:
-        return -1
 
 
 # Press the green button in the gutter to run the script.
@@ -61,7 +62,6 @@ if __name__ == '__main__':
 
     search_first_occurrence(l2, x)
 
-    # not working yet
     result = search_using_binary_alg(l2, 0, len(l2)-1, x)
     if result != -1:
         print(f"Element {x} has the index {result}")
