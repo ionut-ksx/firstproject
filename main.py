@@ -1,6 +1,7 @@
 # This is a sample Python script.
 
 import random
+from prime_no import get_prime_list
 
 def bubble_sort(arr):
     # sort the list
@@ -60,7 +61,7 @@ if __name__ == '__main__':
         # print(l2)
     fp.close()
 
-    search_first_occurrence(l2, x)
+    # search_first_occurrence(l2, x)
 
     result = search_using_binary_alg(l2, 0, len(l2)-1, x)
     if result != -1:
@@ -68,4 +69,3 @@ if __name__ == '__main__':
     else:
         print("Element is not in the list")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
