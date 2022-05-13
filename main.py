@@ -1,7 +1,7 @@
 # This is a sample Python script.
 
 import random
-from prime_no import get_prime_list
+import pdb
 
 def bubble_sort(arr):
     # sort the list
@@ -30,7 +30,7 @@ def find_item(find_x, arr):
 
 def search_first_occurrence(line2, x):
     for item, value in enumerate(line2):
-        if int(value) == int(x):
+        if value == x:
             print(f"Element {int(x)} has first occurrence at index {item}", flush=True)
             break
         elif x not in line2:
@@ -59,9 +59,8 @@ if __name__ == '__main__':
         x = fp.readline()[2:-1]
         l2 = fp.readline().split()
         # print(l2)
-    fp.close()
 
-    # search_first_occurrence(l2, x)
+    search_first_occurrence(l2, x)
 
     result = search_using_binary_alg(l2, 0, len(l2)-1, x)
     if result != -1:
