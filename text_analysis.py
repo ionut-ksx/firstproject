@@ -25,15 +25,8 @@ def extract_data(file_name):
                 alnum_line.append(" ")
             else:
                 alnum_line.append(char)
+
         return ''.join(alnum_line)
-
-    """ Add logic for phone numbers"""
-    def get_phone_number(my_list):
-        # check if each character is digit or in group ()-
-        # check the size number to be in a specific range
-        # print the number
-
-        pass
 
     file_content = {}
     # open the file for reading data
@@ -41,9 +34,11 @@ def extract_data(file_name):
         """ Convert characters to lowercase (avoid mismatch) and remove spaces from begin and the end of the line """
         for line in file_data:
             line = line.lower().strip()
+
             _line = remove_punctuations(line)
             # crate a list of words split by spaces
             _line = _line.split(" ")
+            # build phones list
             """Go over each word in line, add them as keys if not in the dictionary, if present, count its occurrences"""
             for word in _line:
                 if len(word) > 2:
@@ -53,6 +48,17 @@ def extract_data(file_name):
                         file_content[word] = 1
 
     return file_content
+
+def get_phone_numer(file_name):
+    with open(file_name, 'r') as article:
+        phones_list = []
+        for line in article:
+            line = line.strip().split(' ')
+            phone = line.pop()
+            if phone.isdigit() and len(phone) == 10:
+                phones_list.append(phone)
+
+    return phones_list
 
 
 def get_unique_words(my_dict):
@@ -101,5 +107,13 @@ def check_article_content():
     print("-"*20,"\n")
     print("Top 5 words\n","-"*20)
     get_top_five_words(word_occur)
+
+    # Print phone numbers found in the article
+    phone_list = get_phone_numer(file_name)
+    if not phone_list:
+        print("No phone in the article")
+    else:
+        for phone in phone_list:
+            print(f"Phone: {phone}")
 
 check_article_content()
